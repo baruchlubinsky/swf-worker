@@ -4,7 +4,7 @@ require_relative 'job_activity'
 class Seq2resWorkflow
   extend AWS::Flow::Workflows
 
-  workflow :hello do
+  workflow :seq2res do
     {
       version: WorkerUtils::WF_VERSION,
       task_list: WorkerUtils::WF_TASKLIST,
@@ -14,8 +14,10 @@ class Seq2resWorkflow
 
   activity_client(:client) { { from_class: "JobActivity" } }
 
-  def hello(name)
-    client.run_job(name)
+  def seq2res(job_id)
+    client.download_data(job_id)
+    client.run_job(job_id)
+    client.upload_results(job_id)
   end
 end
 
