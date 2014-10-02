@@ -1,0 +1,1 @@
+require 'seq2res_workflow'
