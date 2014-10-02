@@ -1,7 +1,7 @@
 require "aws-sdk"
-require_relative 'worker_utils'
-require_relative 'seq2res_workflow'
-require_relative 'job_activity'
+require_relative 'lib/worker_utils'
+require_relative 'lib/seq2res_workflow'
+require_relative 'lib/job_activity'
 
 # Connect to the queue
 sqs = AWS::SQS.new

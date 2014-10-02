@@ -1,5 +1,5 @@
 require_relative 'worker_utils'
-require_relative 'lib/job_utils'
+require_relative 'job_utils'
 
 # Defines a set of activities for the HelloWorld sample.
 class JobActivity
