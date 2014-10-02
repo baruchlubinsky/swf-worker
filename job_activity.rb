@@ -1,4 +1,5 @@
 require_relative 'worker_utils'
+require_relative 'lib/job_utils'
 
 # Defines a set of activities for the HelloWorld sample.
 class JobActivity
@@ -34,6 +35,8 @@ class JobActivity
   # This activity will say hello when invoked by the workflow
   def download_data(job_id)
     puts "download, #{job_id}!"
+    job = JobController.new(job_id)
+    job.setup
   end
 
   # define an activity with the #activity method.
@@ -50,6 +53,7 @@ class JobActivity
   # This activity will say hello when invoked by the workflow
   def upload_results(job_id)
     puts "uploading, #{job_id}!"
+    job.complete
   end
 
 end

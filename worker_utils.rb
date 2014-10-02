@@ -5,7 +5,7 @@ class WorkerUtils
   ACTIVITY_VERSION = "0.0.1"
   WF_TASKLIST = "workflow_tasklist"
   ACTIVITY_TASKLIST = "activity_tasklist"
-  DOMAIN = "HyraxDev"
+  DOMAIN = ENV["HYRAX_AWORKFLOW_DOMAIN"]
 
   def initialize
     AWS.config({region: 'eu-west-1'}) 
