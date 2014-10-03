@@ -1,0 +1,13 @@
+{
+  "domain": { "name": "HyraxDev" },
+  "workflow_workers": [
+    {
+      "task_list": "workflow_tasklist"
+    }
+  ],
+  "activity_workers": [
+    {
+      "task_list": "activity_tasklist"
+    }
+  ]
+}

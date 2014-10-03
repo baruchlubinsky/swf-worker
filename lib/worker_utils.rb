@@ -5,10 +5,10 @@ class WorkerUtils
   ACTIVITY_VERSION = "0.0.1"
   WF_TASKLIST = "workflow_tasklist"
   ACTIVITY_TASKLIST = "activity_tasklist"
-  DOMAIN = ENV["HYRAX_AWORKFLOW_DOMAIN"]
+  DOMAIN = ENV["HYRAX_WORKFLOW_DOMAIN"]
 
   def initialize
-    AWS.config({region: 'eu-west-1'}) 
+    AWS.config({region: ENV['HYRAX_FLOW_REGION']}) 
     swf = AWS::SimpleWorkflow.new
     @domain = swf.domains[DOMAIN]
     unless @domain.exists?
