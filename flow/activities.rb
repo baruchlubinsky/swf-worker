@@ -1,1 +1,1 @@
-require_relative '../lib/job_activity'
+require 'lib/job_activity'

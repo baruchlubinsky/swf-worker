@@ -1,1 +1,1 @@
-require_relative '../lib/seq2res_workflow'
+require 'lib/seq2res_workflow'

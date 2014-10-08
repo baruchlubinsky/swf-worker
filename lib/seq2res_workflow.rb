@@ -1,4 +1,3 @@
-require_relative 'worker_utils'
 require_relative 'job_activity'
 
 class Seq2resWorkflow
@@ -7,8 +6,8 @@ class Seq2resWorkflow
   workflow :seq2res do
     {
       version: WorkerUtils::WF_VERSION,
-      task_list: WorkerUtils::WF_TASKLIST,
-      execution_start_to_close_timeout: 24 * 60 * 60,
+      #task_list: WorkerUtils::WF_TASKLIST,
+      #execution_start_to_close_timeout: 24 * 60 * 60,
     }
   end
 
@@ -21,4 +20,4 @@ class Seq2resWorkflow
   end
 end
 
-WorkerUtils.new.workflow_worker(Seq2resWorkflow).start if $0 == __FILE__
+# WorkerUtils.new.workflow_worker(Seq2resWorkflow).start if $0 == __FILE__

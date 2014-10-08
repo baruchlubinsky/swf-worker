@@ -3,8 +3,14 @@ require_relative 'lib/worker_utils'
 require_relative 'lib/seq2res_workflow'
 require_relative 'lib/job_activity'
 
+@stop = false
+
+Signal.trap('INT') do
+  @stop = true
+  puts "[INFO] Ctrl+C shutting down. \n"
+end
 # Connect to the queue
-sqs = AWS::SQS.new
+sqs = AWS::SQS.new({region: ENV['HYRAX_WORK_QUEUE_REGION']})
 queue = sqs.queues.named(ENV['HYRAX_WORK_QUEUE'])
 # poll indefinitely
 queue.poll do |msg|
@@ -29,6 +35,9 @@ queue.poll do |msg|
 			puts "[ERROR] Unknown tool: #{message['tool']}"
 		end
 		msg.delete
+		if @stop
+			break
+		end
 	end
 end
 

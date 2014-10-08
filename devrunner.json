@@ -1,5 +1,5 @@
 {
-  "domain": { "name": "HyraxDev" },
+  "domain": { "name": "hyravdevlocaldomain2" },
   "workflow_workers": [
     {
       "task_list": "workflow_tasklist"

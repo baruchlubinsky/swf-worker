@@ -1,19 +1,23 @@
 require 'aws/decider'
 
 class WorkerUtils
-  WF_VERSION = "0.0.1"
-  ACTIVITY_VERSION = "0.0.1"
+  WF_VERSION = "0.1.0"
+  ACTIVITY_VERSION = "0.1.0"
   WF_TASKLIST = "workflow_tasklist"
   ACTIVITY_TASKLIST = "activity_tasklist"
   DOMAIN = ENV["HYRAX_WORKFLOW_DOMAIN"]
 
   def initialize
-    AWS.config({region: ENV['HYRAX_FLOW_REGION']}) 
+    #AWS.config({region: ENV['HYRAX_FLOW_REGION']}) 
     swf = AWS::SimpleWorkflow.new
     @domain = swf.domains[DOMAIN]
     unless @domain.exists?
-      @domain = swf.domains.create(DOMAIN, 10)
+      @domain = swf.domains.create(DOMAIN, 7)
     end
+  end
+
+  def domain
+    @domain
   end
 
   def activity_worker(klass)
@@ -25,6 +29,6 @@ class WorkerUtils
   end
 
   def workflow_client(klass)
-    AWS::Flow::workflow_client(@domain.client, @domain) { { from_class: klass.name } }
+    AWS::Flow::workflow_client(@domain.client, @domain) { { from_class: klass, task_list: WF_TASKLIST } }
   end
 end

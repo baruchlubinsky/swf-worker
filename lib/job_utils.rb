@@ -7,8 +7,8 @@ require 'pathname'
 class JobController
 	def initialize(id)
 		@job_id = id
-		@working_dir = PathName.new(ENV["HYRAX_WORKER_ROOT"]).join(job_id)
-		@api = HyarxApi::V1.new(ENV['HYRAX_API_HOST'], ENV['WORKER_KEY'], job_id, ENV['HYRAX_RESULT_BUCKET'])
+		@working_dir = PathName.new(ENV['HYRAX_WORKER_ROOT']).join(job_id)
+		@api = HyarxApi::V1.new(ENV['HYRAX_API_HOST'], ENV['HYRAX_API_WORKER_KEY'], job_id, ENV['HYRAX_RESULT_BUCKET'])
 	end
 	def setup
 		@job = @api.get_job
