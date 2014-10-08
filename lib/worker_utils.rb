@@ -8,7 +8,8 @@ class WorkerUtils
   DOMAIN = ENV["HYRAX_WORKFLOW_DOMAIN"]
 
   def initialize
-    #AWS.config({region: ENV['HYRAX_FLOW_REGION']}) 
+    # AWS.config({region: ENV['HYRAX_FLOW_REGION']}) 
+    AWS.config({region: 'us-east-1'}) 
     swf = AWS::SimpleWorkflow.new
     @domain = swf.domains[DOMAIN]
     unless @domain.exists?

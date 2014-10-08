@@ -12,6 +12,9 @@ end
 # Connect to the queue
 sqs = AWS::SQS.new({region: ENV['HYRAX_WORK_QUEUE_REGION']})
 queue = sqs.queues.named(ENV['HYRAX_WORK_QUEUE'])
+# SWF
+swf = WorkerUtils.new
+domain = swf.domain
 # poll indefinitely
 queue.poll do |msg|
 	unless msg.nil?
@@ -29,7 +32,8 @@ queue.poll do |msg|
 			if id.nil?
 				puts "[ERROR] Missing required key 'id'"
 			else
-				WorkerUtils.new.workflow_client(Seq2resWorkflow).start_execution(id)
+				client = swf.workflow_client("Seq2resWorkflow")
+				client.start_execution(id)
 			end
 		else
 			puts "[ERROR] Unknown tool: #{message['tool']}"
